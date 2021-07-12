@@ -9,7 +9,6 @@ const App = () => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserAuth(user.uid)
-        console.log(user.uid)
       }
       setInit(true);
     })

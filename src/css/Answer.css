@@ -1,0 +1,54 @@
+.answer__container,
+.answer__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer__container {
+  font-family: serif;
+  background-color: rgba(63, 69, 103, 1);
+  color: white;
+  box-sizing: border-box;
+  padding: 10px;
+  height: 100%;
+}
+
+.answer__title {
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+
+.answer__content {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 90vw;
+  height: 50vh;
+  margin: 20px 0;
+}
+
+.answer__input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.answer__nickname-label,
+.answer__instagram-label {
+  font-size: 0.8rem;
+}
+
+.answer__nickname-container,
+.answer__instagram-container {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.answer__submit {
+  width: 100%;
+}

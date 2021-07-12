@@ -3,21 +3,37 @@ import { useParams } from "react-router-dom";
 import { dbService } from "../fBase";
 
 const Answer = () => {
-    const { id, question } = useParams();
+    const { id, questionid } = useParams();
     const [questionInfo, setQuestionInfo] = useState({});
-    const [answer, setAnswer] = useState("");
+    const [newAnswer, setNewAnswer] = useState("");
     const [instaID, setInstaID] = useState("익명");
     const [nickname, setNickname] = useState("익명");
     const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
+        const prevArray = questionInfo.answerArray;
+        const newAnswerObj = {
+            answerContent: newAnswer,
+            instaID,
+            nickname
+        }
+        await dbService.collection(`${id}`).doc(`${questionInfo.question}`).update({
+            answerArray: [...prevArray, newAnswerObj]
+        }).then(() => {
+            alert("성공적으로 답장했습니다. 감사합니다.")
+        }).catch((error) => {
+            alert("무언가 문제가 생겼습니다. 가능하시다면 스크린샷을 통해 알려주시면 감사하겠습니다. 감사합니다.", error)
+        });
+        setNewAnswer("");
+        setInstaID("익명");
+        setNickname("익명");
     }
 
     const onChange = e => {
         const {target: {name, value}} = e;
         if (name === "answer") {
-            setAnswer(value)
+            setNewAnswer(value)
         } else if (name === "instagram") {
             setInstaID(value)
         } else if (name === "nickname") {
@@ -26,29 +42,37 @@ const Answer = () => {
     }
 
     const getQuestion = async () => {
-        await dbService.collection(`${id}`).where("id", "==", question)
+        await dbService.collection(`${id}`).where("id", "==", questionid)
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach((doc) => {
                 setQuestionInfo(doc.data())
+                setIsLoading(true);
             })
         })
-        setIsLoading(true);
     }
 
     useEffect(() => {
         getQuestion();
     }, [])
     return (
-        <div>
+        <div className="answer__container">
             {isLoading ? 
             <>
-                <span>{questionInfo.question}</span>
-                <form onSubmit={onSubmit}>
-                    <textarea placeholder="뀨" name="answer" onChange={onChange} value={answer} required />
-                    <input type="text" name="nickname" placeholder="이름" onChange={onChange} value={nickname} />
-                    <input type="text" name="instagram" placeholder="인스타 아이디" onChange={onChange} value={instaID} />
-                    <input type="submit" value="뀨"/>
+                <h3 className="answer__title">{questionInfo.question}</h3>
+                <form className="answer__form" onSubmit={onSubmit}>
+                    <textarea className="answer__content" placeholder="대답을 적어주세요." name="answer" onChange={onChange} value={newAnswer} required />
+                    <div className="answer__input-container">
+                        <div className="answer__nickname-container">
+                            <label className="answer__nickname-label" htmlFor="nickname">이름 : </label>
+                            <input className="answer__nickname-input" type="text" name="nickname" placeholder="이름" onChange={onChange} value={nickname} />
+                        </div>
+                        <div className="answer__instagram-container">
+                        <label className="answer__instagram-label" htmlFor="nickname">인스타그램 ID : </label>
+                            <input className="answer__instagram-input" type="text" name="instagram" placeholder="인스타 아이디" onChange={onChange} value={instaID} />
+                        </div>
+                        <input className="answer__submit" type="submit" value="답장 보내기"/>
+                    </div>
                 </form>
             </>
             : "Loading..." }

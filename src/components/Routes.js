@@ -11,7 +11,10 @@ const AppRouter = ({isLoggedIn, userAuth}) => {
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    {isLoggedIn ? <Redirect to={{
+                                            pathname: `/${userAuth}`
+                                            }} /> 
+                    : <Home />}
                 </Route>
                 <Route exact path="/auth">
                     {isLoggedIn ? <Redirect to={{
@@ -22,7 +25,7 @@ const AppRouter = ({isLoggedIn, userAuth}) => {
                 <Route exact path="/:id">
                     <Profile userAuth={userAuth}/>
                 </Route>
-                <Route exact path="/:id/:question">
+                <Route exact path="/:id/:questionid">
                     <Answer userAuth={userAuth}/>
                 </Route>
             </Switch>

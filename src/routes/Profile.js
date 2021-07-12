@@ -10,31 +10,17 @@ const Profile = ({userAuth}) => {
     const [selection, setSelection] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
-    let questionDB = [];
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await dbService.collection(`${userAuth}`).doc("질문들").get().then((doc) => {
-            console.log(doc.data())
-            if (doc.exists) {
-                questionDB = doc.data().questionArray
-            } else {
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-        const questionArrayObj = {
-            questionArray: [...questionDB, question]
-        }
         const questionObj = {
             question,
             id: uuidv4(),
-            answer: [],
-            registered_dttm: Date.now()
+            answerArray: [],
+            registered_dttm: Date.now(),
+            updated_dttm: 0,
         }
         await dbService.collection(`${userAuth}`).doc(`${question}`).set(questionObj)
-        await dbService.collection(`${userAuth}`).doc("질문들").set(questionArrayObj)
         setQuestion("");
     }
 
@@ -45,26 +31,31 @@ const Profile = ({userAuth}) => {
 
     const onSelectChange = e => {
         const {target: {value}} = e;
-        setSelection(value);
+        questions.map((question) => question.question === value && setSelection(question))
     }
 
     const getQuestions = async () => {
-        await dbService.collection(`${userAuth}`).where('id', '!=', "questionArray").get()
-        .then((snapshot) => {
+        dbService.collection(`${userAuth}`)
+        .onSnapshot(snapshot => {
             const questionsData = snapshot.docs.map((doc) => ({
                 id:doc.id,
                 ...doc.data(),
             }))
             setQuestions(questionsData)
         })
+    }
+
+    const getSelection = async () => {
+        const question = await dbService.collection(`${userAuth}`).get()
+        setSelection(question.docs[0].data())
         setIsLoading(true);
     }
 
     useEffect(() => {
-        console.log(id)
         if (id !== userAuth) {
             history.push(`/${id}/a`)
         }
+        getSelection();
         getQuestions();
     }, [])
     return (
@@ -79,13 +70,33 @@ const Profile = ({userAuth}) => {
                 <div>
                     <h5>질문 목록</h5>
                     <select onChange={onSelectChange}>
-                    {questions.map(question => {
-                        return (<option>{question.question}</option>)
-                    })}
-                    </select> 
-                    <div>{questions.map(question => question.question === selection 
-                        ? <a href={`http://localhost:3000/#/YGuWuFyRnEbojXt1J1SewSpDjkt2/${question.id}`}>{question.question} 답변 링크</a>
-                        : null)}
+                        {questions.map((question, index) => {
+                            return (<option key={index}>{question.question}</option>)
+                        })}
+                    </select> <br />
+                    <a href={`http://localhost:3000/#/YGuWuFyRnEbojXt1J1SewSpDjkt2/${selection.id}`}>{selection.question} 답변 링크</a>
+                    <div><br />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>글쓴이</th>
+                                <th>내용</th>
+                                <th>인스타 아이디</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {selection.answerArray.map((answer, index) => {
+                            return (
+                            <tr key={index}>
+                                <td>{answer.nickname}</td>
+                                <td>{answer.answerContent}</td>
+                                <td>{answer.instaID}</td>
+                            </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+
                     </div>
                 </div>
             </>
