@@ -79,7 +79,7 @@ const Answer = () => {
                         <label className="answer__instagram-label" htmlFor="instagram">인스타그램 ID : </label>
                             <input className="answer__instagram-input" type="text" name="instagram" placeholder="인스타 아이디" onChange={onChange} value={instaID} />
                         </div>
-                        <input className="answer__submit" type="submit" value="답장 보내기"/>
+                        <input className="answer__submit" type="submit" value="답장 하기"/>
                     </div>
                 </form>
             </>

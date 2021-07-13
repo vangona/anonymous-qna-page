@@ -7,7 +7,7 @@ import Profile from "../routes/Profile";
 
 const AppRouter = ({isLoggedIn, userAuth}) => {
     useEffect(()=>{
-        console.group(isLoggedIn)
+        console.log(isLoggedIn)
     })
     return (
         <>

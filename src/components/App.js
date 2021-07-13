@@ -12,6 +12,9 @@ const App = () => {
       if (user) {
         setUserAuth(user.uid)
         setIsLoggedIn(true)
+      } else {
+        setUserAuth("")
+        setIsLoggedIn(false)
       }
       setInit(true);
     })

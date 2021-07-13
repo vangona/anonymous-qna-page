@@ -34,10 +34,20 @@ const Profile = ({userAuth}) => {
         questions.map((question) => question.question === value && setSelection(question))
     }
 
-    const onLogOut = e => {
+    const onLogOut = (e) => {
         e.preventDefault();
         authService.signOut();
-        history.push("/logout")
+        history.push("/")
+    }
+
+    const onDeleteAnswer = id => {
+        return function () {
+            selection.answerArray.splice(id, 1)
+            dbService.collection(`${userAuth}`).doc(`${selection.question}`)
+            .update({
+                answerArray : selection.answerArray
+            })
+        }
     }
 
     const getQuestions = async () => {
@@ -59,11 +69,12 @@ const Profile = ({userAuth}) => {
 
     useEffect(() => {
         if (id !== userAuth) {
-            history.push(`/${id}/a`)
+            history.push('/auth')
+        } else {
+            getSelection();
+            getQuestions();
         }
-        getSelection();
-        getQuestions();
-    }, [])
+    }, [userAuth])
 
     return (
         <div>
@@ -89,6 +100,7 @@ const Profile = ({userAuth}) => {
                                 <th>글쓴이</th>
                                 <th>내용</th>
                                 <th>인스타 아이디</th>
+                                <th>삭제</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +110,7 @@ const Profile = ({userAuth}) => {
                                 <td>{answer.nickname}</td>
                                 <td>{answer.answerContent}</td>
                                 <td>{answer.instaID}</td>
+                                <td><button onClick={onDeleteAnswer(index)}>X</button></td>
                             </tr>
                             )
                         })}
