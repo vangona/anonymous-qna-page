@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/qna_page/static/css/main.0d712b58.chunk.css",
-    "main.js": "/qna_page/static/js/main.a8af4d83.chunk.js",
-    "main.js.map": "/qna_page/static/js/main.a8af4d83.chunk.js.map",
+    "main.js": "/qna_page/static/js/main.13df3a1b.chunk.js",
+    "main.js.map": "/qna_page/static/js/main.13df3a1b.chunk.js.map",
     "runtime-main.js": "/qna_page/static/js/runtime-main.99da0bc7.js",
     "runtime-main.js.map": "/qna_page/static/js/runtime-main.99da0bc7.js.map",
     "static/js/2.5d642bec.chunk.js": "/qna_page/static/js/2.5d642bec.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.99da0bc7.js",
     "static/js/2.5d642bec.chunk.js",
     "static/css/main.0d712b58.chunk.css",
-    "static/js/main.a8af4d83.chunk.js"
+    "static/js/main.13df3a1b.chunk.js"
   ]
 }
