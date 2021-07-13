@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { v4 as uuidv4} from "uuid";
 import { authService, dbService } from "../fBase";
 
@@ -92,7 +92,7 @@ const Profile = ({userAuth}) => {
                             return (<option key={index}>{question.question}</option>)
                         })}
                     </select> <br />
-                    <a href={`http://localhost:3000/#/YGuWuFyRnEbojXt1J1SewSpDjkt2/${selection.id}`}>{selection.question} 답변 링크</a>
+                    <Link to={`/${userAuth}/${selection.id}`}>{selection.question}답변 링크</Link>
                     <div><br />
                     <table>
                         <thead>
