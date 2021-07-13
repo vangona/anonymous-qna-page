@@ -11,6 +11,7 @@ const App = () => {
         setUserAuth(user.uid)
       }
       setInit(true);
+      console.log(userAuth)
     })
 
   });
