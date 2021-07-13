@@ -1,11 +1,14 @@
 import { authService } from "../fBase";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState("")
+    const history = useHistory();
+
     const onChange = (event) => {
         const {target: {name, value}} = event;
         if (name === "email") {
@@ -35,7 +38,7 @@ const Auth = () => {
                 setError(error.message)
             }
         }
-
+        history.push("/")
     }
 
     const toggleAccount = () => setNewAccount((prev) => !prev)

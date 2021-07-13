@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { v4 as uuidv4} from "uuid";
-import { dbService } from "../fBase";
+import { authService, dbService } from "../fBase";
 
 const Profile = ({userAuth}) => {
     const history = useHistory();
@@ -34,6 +34,12 @@ const Profile = ({userAuth}) => {
         questions.map((question) => question.question === value && setSelection(question))
     }
 
+    const onLogOut = e => {
+        e.preventDefault();
+        authService.signOut();
+        history.push("/logout")
+    }
+
     const getQuestions = async () => {
         dbService.collection(`${userAuth}`)
         .onSnapshot(snapshot => {
@@ -58,6 +64,7 @@ const Profile = ({userAuth}) => {
         getSelection();
         getQuestions();
     }, [])
+
     return (
         <div>
             {isLoading ? 
@@ -96,7 +103,7 @@ const Profile = ({userAuth}) => {
                         })}
                         </tbody>
                     </table>
-
+                    <button onClick={onLogOut}>로그아웃</button>
                     </div>
                 </div>
             </>
