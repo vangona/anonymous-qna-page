@@ -24,6 +24,9 @@ const Answer = () => {
             answerArray: [...prevArray, newAnswerObj]
         }).then(() => {
             alert("성공적으로 답장했습니다. 감사합니다.")
+            setNewAnswer("");
+            setInstaID("익명");
+            setNickname("익명");
             emailjs.sendForm(Apikeys.SERVICE_ID, Apikeys.TEMPLATE_ID, e.target, Apikeys.USER_ID)
             .then(result => {
                 console.log("Success", result)
@@ -33,9 +36,6 @@ const Answer = () => {
         }).catch((error) => {
             alert("무언가 문제가 생겼습니다. 스크린샷을 통해 알려주시면 감사하겠습니다. 감사합니다.", error)
         });
-        setNewAnswer("");
-        setInstaID("익명");
-        setNickname("익명");
     }
 
     const onChange = e => {

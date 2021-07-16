@@ -1,0 +1,44 @@
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: rgba(63, 69, 103, 1);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile__title {
+  margin-top: 3rem;
+}
+
+.question__form {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.profile__answer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer-page__link {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.answer__table-container {
+  padding: 1px;
+  font-size: 0.9rem;
+  border: 1px solid white;
+}
+
+.answer__table-container th,
+.answer__table-container td {
+  padding: 5px;
+  border: 1px solid white;
+}
