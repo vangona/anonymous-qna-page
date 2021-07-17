@@ -22,7 +22,15 @@ const Profile = ({userAuth}) => {
         }
         await dbService.collection(`${userAuth}`).doc(`${question}`).set(questionObj)
         setSelection(questionObj)
+
+        // 커스텀 기능 구현
+
         setQuestion("");
+    }
+
+    const onQuestionCustomSubmit = async (e) => {
+        e.preventDefault();
+        console.log(e.target[0].value)
     }
 
     const onQuestionChange = e => {
@@ -87,7 +95,6 @@ const Profile = ({userAuth}) => {
             getSelection();
             getQuestions();
         }
-        console.log(selection.answerArray)
     }, [userAuth])
 
     return (
@@ -99,16 +106,20 @@ const Profile = ({userAuth}) => {
                     <input className="question__text" type="text" placeholder="질문" onChange={onQuestionChange} value={question}/>
                     <input className="question__submit" type="submit" value="질문 만들기"/>
                 </form>
-                <hr style={{width: "100%"}}/>
                 <div className="profile__answer-container">
                     { questions ? questions.length !== 0 &&
                     <>
-                        <h5>질문 목록</h5>
+                        <h5>질문 관리 & 답변 보기</h5>
                         <select onChange={onSelectChange} value={selection.question}>
                             {questions.map((question, index) => {
                                 return (<option key={index}>{question.question}</option>)
                             })}
-                        </select> <br /> <br />
+                        </select><br /> 
+                        <form onSubmit={onQuestionCustomSubmit}>
+                            <label>{selection.question}</label>
+                            <input type="color" />
+                            <input type="submit" />
+                        </form><br />
                         <Link className="answer-page__link" to={`/${userAuth}/${selection.id}`}>{selection.question} 답변 링크</Link>
                     </>
                     : null
@@ -132,7 +143,7 @@ const Profile = ({userAuth}) => {
                                     <>
                                         <tr>
                                             <td>{answer.nickname}</td>
-                                            <td>{answer.answerContent}</td>
+                                            <td><Link className="answer-page__link" to={`/${userAuth}/${selection.id}/${index}`}>{answer.answerContent}</Link></td>
                                             <td>{answer.instaID}</td>
                                             <td><button onClick={onDeleteAnswer(index)}>X</button></td>
                                         </tr>
@@ -144,11 +155,13 @@ const Profile = ({userAuth}) => {
                     </>
                     : null
                     }
-                    { questions ? questions.length !== 0 &&
-                    <button onClick={onDeleteQuestion(selection)}>질문 삭제하기</button>
-                    : null
-                    }
-                    <button onClick={onLogOut}>로그아웃</button>
+                    <div className="profile__button-container">
+                        { questions ? questions.length !== 0 &&
+                        <button onClick={onDeleteQuestion(selection)}>질문 삭제하기</button>
+                        : null
+                        }
+                        <button onClick={onLogOut}>로그아웃</button>
+                    </div>
                     </div>
                 </div>
             </>

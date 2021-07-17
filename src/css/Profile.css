@@ -25,6 +25,13 @@
   align-items: center;
 }
 
+.profile__button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .answer-page__link {
   font-style: italic;
   font-size: 0.9rem;
