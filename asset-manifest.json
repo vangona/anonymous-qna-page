@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/qna_page/static/css/main.7caa2326.chunk.css",
-    "main.js": "/qna_page/static/js/main.4613520e.chunk.js",
-    "main.js.map": "/qna_page/static/js/main.4613520e.chunk.js.map",
+    "main.js": "/qna_page/static/js/main.f9f4e0db.chunk.js",
+    "main.js.map": "/qna_page/static/js/main.f9f4e0db.chunk.js.map",
     "runtime-main.js": "/qna_page/static/js/runtime-main.99da0bc7.js",
     "runtime-main.js.map": "/qna_page/static/js/runtime-main.99da0bc7.js.map",
-    "static/js/2.6315301d.chunk.js": "/qna_page/static/js/2.6315301d.chunk.js",
-    "static/js/2.6315301d.chunk.js.map": "/qna_page/static/js/2.6315301d.chunk.js.map",
+    "static/js/2.9f75ed5a.chunk.js": "/qna_page/static/js/2.9f75ed5a.chunk.js",
+    "static/js/2.9f75ed5a.chunk.js.map": "/qna_page/static/js/2.9f75ed5a.chunk.js.map",
     "index.html": "/qna_page/index.html",
     "static/css/main.7caa2326.chunk.css.map": "/qna_page/static/css/main.7caa2326.chunk.css.map",
-    "static/js/2.6315301d.chunk.js.LICENSE.txt": "/qna_page/static/js/2.6315301d.chunk.js.LICENSE.txt"
+    "static/js/2.9f75ed5a.chunk.js.LICENSE.txt": "/qna_page/static/js/2.9f75ed5a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.99da0bc7.js",
-    "static/js/2.6315301d.chunk.js",
+    "static/js/2.9f75ed5a.chunk.js",
     "static/css/main.7caa2326.chunk.css",
-    "static/js/main.4613520e.chunk.js"
+    "static/js/main.f9f4e0db.chunk.js"
   ]
 }
