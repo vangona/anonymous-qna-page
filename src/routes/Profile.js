@@ -22,15 +22,7 @@ const Profile = ({userAuth}) => {
         }
         await dbService.collection(`${userAuth}`).doc(`${question}`).set(questionObj)
         setSelection(questionObj)
-
-        // 커스텀 기능 구현
-
         setQuestion("");
-    }
-
-    const onQuestionCustomSubmit = async (e) => {
-        e.preventDefault();
-        console.log(e.target[0].value)
     }
 
     const onQuestionChange = e => {
@@ -41,7 +33,6 @@ const Profile = ({userAuth}) => {
     const onSelectChange = e => {
         const {target: {value}} = e;
         questions.map((question) => question.question === value && setSelection(question))
-        console.log("selection changed")
     }
 
     const onLogOut = (e) => {
@@ -115,11 +106,7 @@ const Profile = ({userAuth}) => {
                                 return (<option key={index}>{question.question}</option>)
                             })}
                         </select><br /> 
-                        <form onSubmit={onQuestionCustomSubmit}>
-                            <label>{selection.question}</label>
-                            <input type="color" />
-                            <input type="submit" />
-                        </form><br />
+                        <Link className="answer-page__link" to={`/${userAuth}/${selection.id}/custom`}>답변 페이지 커스텀 + 답변 보기</Link>
                         <Link className="answer-page__link" to={`/${userAuth}/${selection.id}`}>{selection.question} 답변 링크</Link>
                     </>
                     : null
@@ -143,7 +130,7 @@ const Profile = ({userAuth}) => {
                                     <>
                                         <tr>
                                             <td>{answer.nickname}</td>
-                                            <td><Link className="answer-page__link" to={`/${userAuth}/${selection.id}/${index}`}>{answer.answerContent}</Link></td>
+                                            <td>{answer.answerContent}</td>
                                             <td>{answer.instaID}</td>
                                             <td><button onClick={onDeleteAnswer(index)}>X</button></td>
                                         </tr>

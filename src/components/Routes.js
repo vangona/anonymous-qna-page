@@ -37,7 +37,7 @@ const AppRouter = ({isLoggedIn, userAuth}) => {
                 <Route exact path="/:id/:questionid">
                     <Answer userAuth={userAuth}/>
                 </Route>
-                <Route exact path="/:id/:questionid/:answerindex">
+                <Route exact path="/:id/:questionid/custom">
                     <Detail userAuth={userAuth}/>
                 </Route>
             </Switch>
