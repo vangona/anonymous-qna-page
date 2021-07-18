@@ -43,19 +43,23 @@ const Profile = ({userAuth}) => {
 
     const onDeleteAnswer = id => {
         return function () {
-            selection.answerArray.splice(id, 1)
-            dbService.collection(`${userAuth}`).doc(`${selection.question}`)
-            .update({
-                answerArray : selection.answerArray
-            })
+            if (window.confirm("정말 해당 답변을 삭제하시겠습니까?")) {
+                selection.answerArray.splice(id, 1)
+                dbService.collection(`${userAuth}`).doc(`${selection.question}`)
+                .update({
+                    answerArray : selection.answerArray
+                })
+            }
         }
     }
 
     const onDeleteQuestion = selectionToDel => {
         return function () {
-            dbService.collection(`${userAuth}`).doc(`${selectionToDel.question}`).delete();
-            if (questions) {
-                setSelection(questions[0])
+            if (window.confirm("정말 해당 질문을 삭제하시겠습니까? \n 포함된 답변들도 모두 삭제됩니다.")) {
+                dbService.collection(`${userAuth}`).doc(`${selectionToDel.question}`).delete();
+                if (questions) {
+                    setSelection(questions[0])
+                }
             }
         }
     }
@@ -92,7 +96,8 @@ const Profile = ({userAuth}) => {
         <div className="profile__container">
             {isLoading ? 
             <>
-                <h3 className="profile__title">프로필(질문 만들기)</h3>
+                <h3 className="profile__title">Q & A</h3>
+                <h5>질문 만들기</h5>
                 <form onSubmit={onSubmit} className="question__form">
                     <input className="question__text" type="text" placeholder="질문" onChange={onQuestionChange} value={question}/>
                     <input className="question__submit" type="submit" value="질문 만들기"/>
@@ -106,8 +111,8 @@ const Profile = ({userAuth}) => {
                                 return (<option key={index}>{question.question}</option>)
                             })}
                         </select><br /> 
-                        <Link className="answer-page__link" to={`/${userAuth}/${selection.id}/custom`}>답변 페이지 커스텀 + 답변 보기</Link>
-                        <Link className="answer-page__link" to={`/${userAuth}/${selection.id}`}>{selection.question} 답변 링크</Link>
+                        <Link className="question-page__link" to={`/${userAuth}/${selection.id}/custom`}>답변 페이지 커스텀 + 답변 보기</Link><br />
+                        <Link className="answer-page__link" to={`/${userAuth}/${selection.id}`}>{selection.question} 답변 링크 공유하기</Link>
                     </>
                     : null
                     }
