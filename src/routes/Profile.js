@@ -35,6 +35,16 @@ const Profile = ({userAuth}) => {
         questions.map((question) => question.question === value && setSelection(question))
     }
 
+    const onLinkClick = (e) => {
+        e.preventDefault();
+        const tempElem = document.createElement('textarea')
+        tempElem.value = `${window.location.protocol}//${window.location.host}/${userAuth}/${selection.id}#/${userAuth}/${selection.id}`
+        document.body.appendChild(tempElem)
+        tempElem.select();
+        document.execCommand("copy");
+        history.push(`/${userAuth}/${selection.id}`)
+    }
+
     const onLogOut = (e) => {
         e.preventDefault();
         authService.signOut();
@@ -102,21 +112,21 @@ const Profile = ({userAuth}) => {
                     <input className="question__text" type="text" placeholder="질문" onChange={onQuestionChange} value={question}/>
                     <input className="question__submit" type="submit" value="질문 만들기"/>
                 </form>
-                <div className="profile__answer-container">
-                    { questions ? questions.length !== 0 &&
+                <hr style={{width: "80%"}}/>
+                { questions ? questions.length !== 0 &&
                     <>
                         <h5>질문 관리 & 답변 보기</h5>
                         <select onChange={onSelectChange} value={selection.question}>
                             {questions.map((question, index) => {
                                 return (<option key={index}>{question.question}</option>)
                             })}
-                        </select><br /> 
+                        </select>
                         <Link className="question-page__link" to={`/${userAuth}/${selection.id}/custom`}>답변 페이지 커스텀 + 답변 보기</Link><br />
-                        <Link className="answer-page__link" to={`/${userAuth}/${selection.id}`}>{selection.question} 답변 링크 공유하기</Link>
+                        <button onClick={onLinkClick} className="answer-page__link" >' {selection.question} ' 답변 링크 공유하기</button>
                     </>
-                    : null
-                    }
-                    <div><br />
+                : null
+                }
+                    <div>
                     {selection.answerArray ? selection.answerArray.length !== 0 &&
                     <>
                         <table className="answer__table-container">
@@ -153,7 +163,6 @@ const Profile = ({userAuth}) => {
                         : null
                         }
                         <button onClick={onLogOut}>로그아웃</button>
-                    </div>
                     </div>
                 </div>
             </>

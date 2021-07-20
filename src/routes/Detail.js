@@ -19,7 +19,8 @@ const Detail = ({userAuth}) => {
                 font,
                 fontStyle,
                 backgroundColor,
-            }
+            },
+            updated_dttm: Date.now()
         });
         alert("성공적으로 변경되었습니다.");
     }
@@ -46,6 +47,11 @@ const Detail = ({userAuth}) => {
             querySnapshot.forEach((doc) => {
                 setQuestion(doc.data())
                 setAnswer(doc.data().answerArray)
+                if (doc.data().style) {
+                    setBackgroundColor(doc.data().style.backgroundColor)
+                    setFont(doc.data().style.font)
+                    setFontStyle(doc.data().style.fontStyle)
+                }
                 setIsLoading(true);
             })
         })
@@ -80,7 +86,7 @@ const Detail = ({userAuth}) => {
                     <label className="answer__instagram-label" htmlFor="instagram">배경 색상 : </label>
                         <input onChange={onBgColorChange} type="color" value={backgroundColor}/>
                     </div>
-                    <input className="answer__submit" type="submit" value="답장 하기"/>
+                    <input className="answer__submit" type="submit" value="저장 하기"/>
                 </div>
             </form>
         </>

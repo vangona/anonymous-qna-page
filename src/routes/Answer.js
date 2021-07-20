@@ -10,6 +10,9 @@ const Answer = () => {
     const [newAnswer, setNewAnswer] = useState("");
     const [instaID, setInstaID] = useState("익명");
     const [nickname, setNickname] = useState("익명");
+    const [backgroundColor, setBackgroundColor] = useState("");
+    const [font, setFont] = useState("");
+    const [fontStyle, setFontStyle] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async e => {
@@ -55,6 +58,11 @@ const Answer = () => {
         .then(querySnapshot => {
             querySnapshot.forEach((doc) => {
                 setQuestionInfo(doc.data())
+                if (doc.data().style) {
+                    setBackgroundColor(doc.data().style.backgroundColor)
+                    setFont(doc.data().style.font)
+                    setFontStyle(doc.data().style.fontStyle)
+                }
                 setIsLoading(true);
             })
         })
@@ -64,10 +72,10 @@ const Answer = () => {
         getQuestion();
     }, [])
     return (
-        <div className="answer__container">
+        <div style={{backgroundColor: backgroundColor}}  className="answer__container">
             {isLoading ? 
             <>
-                <h3 className="answer__title">{questionInfo.question}</h3>
+                <h3  style={{fontStyle: fontStyle, fontFamily: font}}  className="answer__title">{questionInfo.question}</h3>
                 <form className="answer__form" onSubmit={onSubmit}>
                     <textarea className="answer__content" type="text" placeholder="대답을 적어주세요." name="answer" onChange={onChange} value={newAnswer} required />
                     <div className="answer__input-container">
