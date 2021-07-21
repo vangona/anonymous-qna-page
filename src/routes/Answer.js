@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { dbService } from "../fBase";
 import emailjs from "emailjs-com"
 import Apikeys from "../ApiKeys";
@@ -14,6 +14,7 @@ const Answer = () => {
     const [font, setFont] = useState("");
     const [fontStyle, setFontStyle] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const history = useHistory();
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -50,6 +51,11 @@ const Answer = () => {
         } else if (name === "nickname") {
             setNickname(value)
         }
+    }
+
+    const onCreateAccountClick = e => {
+        e.preventDefault();
+        history.push("/auth")
     }
 
     const getQuestion = async () => {
@@ -90,6 +96,7 @@ const Answer = () => {
                         <input className="answer__submit" type="submit" value="답장 하기"/>
                     </div>
                 </form>
+                <button onClick={onCreateAccountClick}>나도 질문 만들러 가기</button>
             </>
             : "Loading..." }
         </div>

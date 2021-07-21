@@ -32,10 +32,18 @@
   align-items: center;
 }
 
+.question-pages {
+  margin-bottom: 1rem;
+}
+
 .question-page__link {
   text-decoration: none;
   font-size: 0.9rem;
   color: white;
+}
+
+.answer-page__link {
+  margin-bottom: 2rem;
 }
 
 .answer__table-container {

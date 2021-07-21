@@ -116,7 +116,7 @@ const Profile = ({userAuth}) => {
                 { questions ? questions.length !== 0 &&
                     <>
                         <h5>질문 관리 & 답변 보기</h5>
-                        <select onChange={onSelectChange} value={selection.question}>
+                        <select className="question-pages" onChange={onSelectChange} value={selection.question}>
                             {questions.map((question, index) => {
                                 return (<option key={index}>{question.question}</option>)
                             })}

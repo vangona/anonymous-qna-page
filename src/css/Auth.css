@@ -1,0 +1,47 @@
+.auth__container,
+.auth-form {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth__container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(63, 69, 103, 1);
+}
+
+.auth-form {
+  align-items: flex-start;
+}
+
+.auth-form__component {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.auth-form__title {
+  margin-right: 1rem;
+}
+
+.auth-form__btn {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-btn {
+  margin-top: 0.5rem;
+}
+
+.change-btn:hover {
+  cursor: pointer;
+}

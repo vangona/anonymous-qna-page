@@ -43,19 +43,31 @@ const Auth = () => {
 
     const toggleAccount = () => setNewAccount((prev) => !prev)
     return (
-        <>
+        <div className="auth__container">
+            <h3 className="auth__title">질문 페이지</h3>
+            <p>질문을 만드려면 가입을 해야해요.</p>
             <div className="auth-form__container">
                 <form className="auth-form" onSubmit={onSubmit}>
-                    <input className="input auth__input" name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
-                    <input className="input auth__input" name="password" type="password" placeholder="Password" required value={password} onChange={onChange}/>
-                    <input className="btn" type="submit" value={newAccount ? "Create Account" : "Log In"} />
-                    <span className="error">{error}</span>
-                    <span className="change-btn" onClick={toggleAccount}>
-                        {newAccount? "Log In" : "Create Account"}
-                    </span>
+                    <div className="auth-form__component">
+                        <label className="auth-form__title">E-mail</label>
+                        <input className="input auth__input" name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
+                    </div>
+                    <div className="auth-form__component">
+                        <label className="auth-form__title">Password</label>
+                        <input className="input auth__input" name="password" type="password" placeholder="Password" required value={password} onChange={onChange}/>
+                    </div>
+                    <div className="auth-form__btn">
+                        <input className="btn" type="submit" value={newAccount ? "Create Account" : "Log In"} />
+                        <span className="error">{error}</span>
+                        <span className="change-btn" onClick={toggleAccount}>
+                            { newAccount 
+                            ? "Log In" 
+                            : "Create Account" }
+                        </span>
+                    </div>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 
