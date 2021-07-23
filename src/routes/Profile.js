@@ -37,7 +37,7 @@ const Profile = ({userAuth}) => {
 
     const onLinkClick = (e) => {
         e.preventDefault();
-        const tempElem = document.createElement('textarea')
+        const tempElem = document.createElement('input')
         tempElem.value = `${window.location.protocol}//${window.location.host}/${userAuth}/${selection.id}#/${userAuth}/${selection.id}`
         document.body.appendChild(tempElem)
         tempElem.select();

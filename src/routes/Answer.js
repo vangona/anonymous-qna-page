@@ -96,7 +96,7 @@ const Answer = () => {
                         <input className="answer__submit" type="submit" value="답장 하기"/>
                     </div>
                 </form>
-                <button onClick={onCreateAccountClick}>나도 질문 만들러 가기</button>
+                {/* <button onClick={onCreateAccountClick}>나도 질문 만들러 가기</button> */}
             </>
             : "Loading..." }
         </div>
