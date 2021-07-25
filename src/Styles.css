@@ -1,6 +1,9 @@
+@import "./css/variables.css";
 @import "./css/Answer.css";
 @import "./css/Profile.css";
 @import "./css/Auth.css";
+@import "./css/LoginModal.css";
+@import "./css/Modal.css";
 
 html,
 body,

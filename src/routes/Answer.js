@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { dbService } from "../fBase";
 import emailjs from "emailjs-com"
 import Apikeys from "../ApiKeys";
+import LoginModal from "../components/LoginModal";
+import Modal from "../components/Modal";
 
 const Answer = () => {
     const { id, questionid } = useParams();
@@ -14,7 +16,9 @@ const Answer = () => {
     const [font, setFont] = useState("");
     const [fontStyle, setFontStyle] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
+    const [loginModal, setLoginModal] = useState(false);
+    const [copyState, setCopyState] = useState(false);
+    const location = useLocation();
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -55,7 +59,8 @@ const Answer = () => {
 
     const onCreateAccountClick = e => {
         e.preventDefault();
-        history.push("/auth")
+        const answerContainer = document.querySelector(".answer__container")
+        setLoginModal(true)
     }
 
     const getQuestion = async () => {
@@ -76,9 +81,14 @@ const Answer = () => {
 
     useEffect(() => {
         getQuestion();
+        if (location.state) {
+            const {state: { copy }} = location;
+            setCopyState(copy)
+            setTimeout(() => {setCopyState(false)}, 1000)
+        }
     }, [])
     return (
-        <div style={{backgroundColor: backgroundColor}}  className="answer__container">
+        <div style={{backgroundColor: backgroundColor}} className="answer__container">
             {isLoading ? 
             <>
                 <h3  style={{fontStyle: fontStyle, fontFamily: font}}  className="answer__title">{questionInfo.question}</h3>
@@ -96,7 +106,9 @@ const Answer = () => {
                         <input className="answer__submit" type="submit" value="답장 하기"/>
                     </div>
                 </form>
-                {/* <button onClick={onCreateAccountClick}>나도 질문 만들러 가기</button> */}
+                <button onClick={onCreateAccountClick}>나도 질문 만들러 가기</button>
+                {copyState && <Modal content={"클립보드에 링크가 복사되었습니다."}/>}
+                {loginModal && <LoginModal setLoginModal={setLoginModal}/>}
             </>
             : "Loading..." }
         </div>

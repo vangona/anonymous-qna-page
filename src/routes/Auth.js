@@ -1,3 +1,5 @@
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authService } from "../fBase";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -42,10 +44,10 @@ const Auth = () => {
     }
 
     const toggleAccount = () => setNewAccount((prev) => !prev)
+
     return (
         <div className="auth__container">
             <h3 className="auth__title">질문 페이지</h3>
-            <p>질문을 만드려면 가입을 해야해요.</p>
             <div className="auth-form__container">
                 <form className="auth-form" onSubmit={onSubmit}>
                     <div className="auth-form__component">
@@ -60,7 +62,7 @@ const Auth = () => {
                         <input className="btn" type="submit" value={newAccount ? "Create Account" : "Log In"} />
                         <span className="error">{error}</span>
                         <span className="change-btn" onClick={toggleAccount}>
-                            { newAccount 
+                            <FontAwesomeIcon icon={faExchangeAlt} /> { newAccount 
                             ? "Log In" 
                             : "Create Account" }
                         </span>

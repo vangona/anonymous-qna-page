@@ -1,0 +1,26 @@
+.modal-background {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s linear;
+}
+
+.modal-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: auto;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  background-color: var(--purple);
+  color: white;
+  font-size: 0.9rem;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-family: sans-serif;
+}

@@ -18,12 +18,13 @@
 .answer__title {
   font-family: sans-serif;
   letter-spacing: 1px;
+  font-size: 1rem;
 }
 
 .answer__content {
   box-sizing: border-box;
   padding: 10px;
-  width: 90vw;
+  width: 80vw;
   height: 50vh;
   margin: 20px 0;
 }
@@ -43,12 +44,12 @@
 .answer__nickname-container,
 .answer__instagram-container {
   display: flex;
-  width: 80%;
+  width: 80vw;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .answer__submit {
-  width: 80%;
+  width: 80vw;
 }
