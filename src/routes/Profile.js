@@ -116,58 +116,61 @@ const Profile = ({userAuth}) => {
                     <input className="question__text" type="text" placeholder="질문" onChange={onQuestionChange} value={question}/>
                     <input className="question__submit" type="submit" value="질문 만들기"/>
                 </form>
-                <hr style={{width: "80%"}}/>
-                { questions ? questions.length !== 0 &&
-                    <>
-                        <h5>질문 관리 & 답변 보기</h5>
-                        <select className="question-pages" onChange={onSelectChange} value={selection.question}>
-                            {questions.map((question, index) => {
-                                return (<option key={index}>{question.question}</option>)
-                            })}
-                        </select>
-                        <Link className="question-page__link" to={`/${userAuth}/${selection.id}/custom`}>답변 페이지 커스텀 + 답변 보기</Link><br />
-                        <button onClick={onLinkClick} className="answer-page__link" >' {selection.question} ' 답변 링크 공유하기</button>
-                    </>
-                : null
-                }
-                    <div>
-                    {selection.answerArray ? selection.answerArray.length !== 0 &&
-                    <>
-                        <table className="answer__table-container">
-                            <thead>
-                                <tr>
-                                    <th>글쓴이</th>
-                                    <th>내용</th>
-                                    <th>인스타 아이디</th>
-                                    <th>삭제</th>
-                                </tr>
-                            </thead>
-                            <tbody  className="answer__table-body">                                
+                <hr style={{width: "80%"}}/><br />
+                <div className="profile__answer-container">
+                    { questions ? questions.length !== 0 &&
+                        <>
+                            <h5>질문 관리 & 답변 보기</h5>
+                            <select className="question-pages" onChange={onSelectChange} value={selection.question}>
+                                {questions.map((question, index) => {
+                                    return (<option key={index}>{question.question}</option>)
+                                })}
+                            </select>
+                            <button onClick={onLinkClick} className="answer-page__link btn" >' {selection.question} ' 답변 링크 공유하기</button>
+                            {selection.answerArray ? selection.answerArray.length !== 0 &&
+                        <>
+                            <table className="answer__table-container">
+                                <thead>
+                                    <tr>
+                                        <th>글쓴이</th>
+                                        <th>내용</th>
+                                        <th>인스타 아이디</th>
+                                        <th>삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody  className="answer__table-body">                                
 
-                            {selection.answerArray.map((answer, index) => {
-                                return (
-                                    <>
-                                        <tr>
-                                            <td>{answer.nickname}</td>
-                                            <td>{answer.answerContent}</td>
-                                            <td>{answer.instaID}</td>
-                                            <td><button onClick={onDeleteAnswer(index)}>X</button></td>
-                                        </tr>
-                                    </>
-                                )
-                            })}
-                            </tbody>
-                        </table><br />
-                    </>
-                    : null
-                    }
-                    <div className="profile__button-container">
-                        { questions ? questions.length !== 0 &&
-                        <button onClick={onDeleteQuestion(selection)}>질문 삭제하기</button>
+                                {selection.answerArray.map((answer, index) => {
+                                    return (
+                                        <>
+                                            <tr>
+                                                <td>{answer.nickname}</td>
+                                                <td>{answer.answerContent}</td>
+                                                <td>{answer.instaID}</td>
+                                                <td><button onClick={onDeleteAnswer(index)}>X</button></td>
+                                            </tr>
+                                        </>
+                                    )
+                                })}
+                                </tbody>
+                            </table><br />
+                        </>
                         : null
                         }
-                        <button onClick={onLogOut}>로그아웃</button>
-                    </div>
+                            <div className="profile__button-container">
+                            <Link className="question-page__link" to={`/${userAuth}/${selection.id}/custom`}><button className="btn">답변 페이지 커스텀</button></Link>
+                            { questions ? questions.length !== 0 &&
+                            <button className="btn" onClick={onDeleteQuestion(selection)}>질문 삭제하기</button>
+                            : null
+                            }
+                            </div>
+                        </>
+                    : null
+                    }
+                </div>
+                <br />
+                <div className="profile__button-container">
+                    <button className="btn" onClick={onLogOut}>로그아웃</button>
                 </div>
             </>
             : "Loading..."}
