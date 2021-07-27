@@ -71,9 +71,7 @@ const Profile = ({userAuth}) => {
         return function () {
             if (window.confirm("정말 해당 질문을 삭제하시겠습니까? \n 포함된 답변들도 모두 삭제됩니다.")) {
                 dbService.collection(`${userAuth}`).doc(`${selectionToDel.question}`).delete();
-                if (questions) {
-                    setSelection(questions[0])
-                }
+                getSelection();
             }
         }
     }
@@ -110,8 +108,7 @@ const Profile = ({userAuth}) => {
         <div className="profile__container">
             {isLoading ? 
             <>
-                <h3 className="profile__title">Q & A</h3>
-                <h5>질문 만들기</h5>
+                <h3 className="profile__title">질문 만들기</h3>
                 <form onSubmit={onSubmit} className="question__form">
                     <input className="question__text" type="text" placeholder="질문" onChange={onQuestionChange} value={question}/>
                     <input className="question__submit" type="submit" value="질문 만들기"/>
@@ -126,7 +123,7 @@ const Profile = ({userAuth}) => {
                                     return (<option key={index}>{question.question}</option>)
                                 })}
                             </select>
-                            <button onClick={onLinkClick} className="answer-page__link btn" >' {selection.question} ' 답변 링크 공유하기</button>
+                            <button onClick={onLinkClick} className="answer-page__link btn" >답변 링크 공유하기</button>
                             {selection.answerArray ? selection.answerArray.length !== 0 &&
                         <>
                             <table className="answer__table-container">

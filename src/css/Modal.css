@@ -17,10 +17,10 @@
   margin: auto;
   padding: 15px 30px;
   box-sizing: border-box;
-  background-color: var(--purple);
-  color: white;
+  background-color: var(--btn-color);
+  color: black;
   font-size: 0.9rem;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 20px;
   font-family: sans-serif;
 }
