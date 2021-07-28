@@ -88,7 +88,8 @@ const Profile = ({userAuth}) => {
     }
 
     const getSelection = async () => {
-        const question = await dbService.collection(`${userAuth}`).get()
+        const question = await dbService.collection(`${userAuth}`)
+        .get()
         if (question.docs[0]) {
             setSelection(question.docs[0].data())
         }
