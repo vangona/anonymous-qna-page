@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { v4 as uuidv4} from "uuid";
+import Modal from "../components/Modal";
 import { authService, dbService } from "../fBase";
 
 const Profile = ({userAuth}) => {
@@ -9,6 +10,7 @@ const Profile = ({userAuth}) => {
     const [questions, setQuestions] = useState([]);
     const [selection, setSelection] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [modalState, setModalState] = useState(false);
     const { id } = useParams();
 
     const onSubmit = async (e) => {
@@ -39,7 +41,7 @@ const Profile = ({userAuth}) => {
         e.preventDefault();
         const tempElem = document.createElement('input')
         document.body.appendChild(tempElem)
-        tempElem.value = `${window.location.protocol}//${window.location.host}/${userAuth}/${selection.id}#/${userAuth}/${selection.id}`
+        tempElem.value = `${window.location.protocol}//${window.location.host}/qna_page/#/${userAuth}/${selection.id}`
         tempElem.select();
         document.execCommand("copy");
         document.body.removeChild(tempElem)
@@ -75,6 +77,10 @@ const Profile = ({userAuth}) => {
             }
         }
     }
+
+    const onClickAnswer = e => {
+        setModalState(true);
+    };
 
     const getQuestions = async () => {
         dbService.collection(`${userAuth}`)
@@ -130,9 +136,8 @@ const Profile = ({userAuth}) => {
                             <table className="answer__table-container">
                                 <thead>
                                     <tr>
-                                        <th>글쓴이</th>
                                         <th>내용</th>
-                                        <th>인스타 아이디</th>
+                                        <th>이름</th>
                                         <th>삭제</th>
                                     </tr>
                                 </thead>
@@ -142,11 +147,11 @@ const Profile = ({userAuth}) => {
                                     return (
                                         <>
                                             <tr>
+                                                <td onClick={onClickAnswer} className="answer__table-content">{answer.answerContent.length > 15 ? answer.answerContent.slice(0, 15) + "..." : answer.answerContent}</td>
                                                 <td>{answer.nickname}</td>
-                                                <td>{answer.answerContent}</td>
-                                                <td>{answer.instaID}</td>
                                                 <td><button onClick={onDeleteAnswer(index)}>X</button></td>
                                             </tr>
+                                            {modalState && <Modal content={answer.answerContent} setModalState={setModalState} />}
                                         </>
                                     )
                                 })}

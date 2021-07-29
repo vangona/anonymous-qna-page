@@ -71,6 +71,7 @@
 }
 
 .answer__table-container {
+  width: 100%;
   padding: 1px;
   font-size: 0.9rem;
   border: 1px solid black;
@@ -80,4 +81,16 @@
 .answer__table-container td {
   padding: 5px;
   border: 1px solid black;
+}
+
+.answer__table-content {
+  width: 60%;
+}
+
+.answer__table-content:hover {
+  cursor: pointer;
+}
+
+.answer__table-container td {
+  text-align: center;
 }

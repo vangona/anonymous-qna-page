@@ -1,8 +1,11 @@
 import React from "react";
 
-const Modal = ({content}) => {
+const Modal = ({content, setModalState}) => {
+    const onBackgroundClick = () => {
+        setModalState(false)
+    }
     return (
-        <div className="modal-background">
+        <div onClick={onBackgroundClick} className="modal-background">
             <div className="modal-container">
                 <span>{content}</span>
             </div>
