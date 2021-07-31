@@ -47,7 +47,7 @@ const Auth = () => {
 
     return (
         <div className="auth__container">
-            <h3 className="auth__title">질문 페이지</h3>
+            <h3 className="auth__title">무엇이든 물어보세요</h3>
             <div className="auth-form__container">
                 <form className="auth-form" onSubmit={onSubmit}>
                     <div className="auth-form__component">
