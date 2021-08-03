@@ -5,6 +5,7 @@ import Auth from "../routes/Auth";
 import Detail from "../routes/Detail";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
+import Wordcloud from "./Wordcloud";
 
 const AppRouter = ({isLoggedIn, userAuth}) => {
     useEffect(()=>{
@@ -33,6 +34,9 @@ const AppRouter = ({isLoggedIn, userAuth}) => {
                 </Route>
                 <Route exact path="/:id">
                     <Profile userAuth={userAuth}/>
+                </Route>
+                <Route exact path="/:id/wordcloud">
+                    <Wordcloud />
                 </Route>
                 <Route exact path="/:id/:questionid">
                     <Answer userAuth={userAuth}/>
