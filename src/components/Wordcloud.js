@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 import cloud from "d3-cloud";
-import mod from "korean-text-analytics"
 
 const Wordcloud = () => {
-  const nlp = () => {
-    const task = new mod.TaskQueue();
 
-    mod.ExecuteMorphModule('아버지가 방에 들어가신다,', function(err, rep) {
-      console.log(err, rep);
-    })
+  
+  const getData = () => {
+    
   }
 
   const end = (words) => {
@@ -46,8 +43,6 @@ const Wordcloud = () => {
         .fontSize(function(d) { return d.size; })
         .on("end", end)
         .start();
-
-        nlp();
     })
   
     return (
