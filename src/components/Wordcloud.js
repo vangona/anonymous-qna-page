@@ -7,9 +7,9 @@ import { Tagger, Parser } from 'koalanlp/proc';
 
 const Wordcloud = () => {
   
-  // const getData = async () => {
-  //   await initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
-  // }
+  const getData = async () => {
+    await initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
+  }
 
   const end = (words) => {
     d3.select("#word-cloud")
@@ -45,7 +45,7 @@ const Wordcloud = () => {
     }
 
   useEffect(() => {
-    // getData();
+    getData();
     const data = [
         "Hello", "world", "normally", "you", "want", "more", "words",
         "than", "this"]
